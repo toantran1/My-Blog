@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 /*
@@ -17,3 +18,8 @@ Route::prefix('categories')->group(function(){
     Route::get('index',[HomeController::class, 'index']);
 });
 
+Route::prefix('admin')->group(function(){
+
+    Route::get('admin-login',[AdminController::class,'index']);
+    Route::get('admin-dashboard',[AdminController::class,'show_dashboard']);
+});
