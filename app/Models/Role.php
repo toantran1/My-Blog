@@ -14,5 +14,5 @@ class Role extends Model
         'role_name','status'
     ];
     protected $primaryKey = 'user_id';
-    protected $table = 'role';
+    protected $table = 'tbl_role';
 }

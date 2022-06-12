@@ -4,6 +4,7 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+
 <?php use Illuminate\Support\Facades\Session; ?>
 <!DOCTYPE html>
 
@@ -84,7 +85,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<ul class="dropdown-menu extended logout">
 							<li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
 							<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-							<li><a href="{{URL::to('/logout')}}"><i class="fa fa-key"></i> Log Out</a></li>
+							<li><a href="{{URL::to('admin/logout')}}"><i class="fa fa-key"></i> Log Out</a></li>
 						</ul>
 					</li>
 					<!-- user login dropdown end -->
@@ -110,11 +111,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li class="sub-menu">
 							<a href="javascript:;">
 								<i class="fa fa-book"></i>
-								<span>Category</span>
+								<span>Manage Account</span>
 							</a>
 							<ul class="sub">
-								<li><a href="{{URL::to('/add-category-product')}}">Add Category Product</a></li>
-								<li><a href="{{URL::to('/all-category-product')}}">Category product list</a></li>
+								<li><a href="{{URL::to('admin/add-new-account')}}">Add New Account</a></li>
+								<li><a href="{{URL::to('admin/add-new-role')}}">Add New Role</a></li>
+								<li><a href="{{URL::to('admin/add-new-account')}}">Role List</a></li>
+								<li><a href="{{URL::to('admin/all-account')}}">Account list</a></li>
 
 							</ul>
 						</li>
@@ -130,6 +133,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<section class="wrapper">
 
 				@yield('admin_content')
+				
 
 			</section>
 			<!-- footer -->

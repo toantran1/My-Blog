@@ -22,4 +22,11 @@ Route::prefix('admin')->group(function(){
 
     Route::get('admin-login',[AdminController::class,'index']);
     Route::get('admin-dashboard',[AdminController::class,'show_dashboard']);
+    Route::get('add-new-account',[AdminController::class,'add_new_account_page']);
+    Route::get('add-new-account',[AdminController::class,'show_role']);
+    Route::get('add-new-role',[AdminController::class,'add_new_role_page']);
+    Route::post('insert-role',[AdminController::class,'insertRole']);
+    Route::post('create-account',[AdminController::class,'createAccount']);
+    Route::post('admin-login',[AdminController::class,'admin_login']);
+    Route::get('logout',[AdminController::class,'admin_logout']);
 });

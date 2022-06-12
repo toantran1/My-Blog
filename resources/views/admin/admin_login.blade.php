@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			Session::put('message',null);
 		}
 	?>
-		<form action="{{URL::to('/admin-dashboard')}}" method="post">
+		<form action="{{URL::to('admin/admin-login')}}" method="post">
 			{{csrf_field()}}
 			<input type="text" class="ggg" name="admin_email" placeholder="please enter your email" required="">
 			<input type="password" class="ggg" name="admin_password" placeholder="Password" required="">
@@ -43,7 +43,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"></div>
 				<input type="submit" value="Sign In" name="login">
 		</form>
-		<p>Don't Have an Account ?<a href="registration.html">Create an account</a></p>
+		<!-- <p>Don't Have an Account ?<a href="registration.html">Create an account</a></p> -->
 </div>
 </div>
 <script src="{{('public/backend/js/bootstrap.js')}}"></script>
