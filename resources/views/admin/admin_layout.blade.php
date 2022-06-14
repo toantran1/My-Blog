@@ -122,6 +122,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</ul>
 						</li>
 
+						<li class="sub-menu">
+							<a href="javascript:;">
+								<i class="fa fa-book"></i>
+								<span>To do list</span>
+							</a>
+							<ul class="sub">
+								<li><a href="{{URL::to('todoList/add-new-todo')}}">Add New todos</a></li>
+								<li><a href="{{URL::to('todoList/todo-list')}}">Show all todo list</a></li>
+								<!-- <li><a href="{{URL::to('admin/add-new-account')}}">Role List</a></li>
+								<li><a href="{{URL::to('admin/all-account')}}">Account list</a></li> -->
+
+							</ul>
+						</li>
+
+
 					</ul>
 				</div>
 				<!-- sidebar menu end-->

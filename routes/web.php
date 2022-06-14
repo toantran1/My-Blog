@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TodoListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 /*
@@ -29,4 +30,11 @@ Route::prefix('admin')->group(function(){
     Route::post('create-account',[AdminController::class,'createAccount']);
     Route::post('admin-login',[AdminController::class,'admin_login']);
     Route::get('logout',[AdminController::class,'admin_logout']);
+});
+
+Route::prefix('todoList')->group(function(){
+    Route::get('add-new-todo',[TodoListController::class,'add_new_todo_page']);
+    Route::post('insert-task',[TodoListController::class,'insert_task']);
+    Route::get('todo-list',[TodoListController::class,'show_todoList']);
+    Route::get('delete-task/{id}',[TodoListController::class,'delete_task'])->name('task.delete');
 });

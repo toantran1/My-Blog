@@ -38,11 +38,13 @@
                         </div>
                         <div class="form-group">
                         <label for="exampleInputPassword1">Role</label>
-                        @foreach($showRole as $role)
+                        
                             <select class="form-control input-sm m-bot15" name="role">
+                            @foreach($showRole as $role)
                                 <option value="{{$role->user_id}}">{{$role->role_name}}</option>  
+                            @endforeach
                             </select>
-                        @endforeach
+                        
                         </div>
                        
                         <button type="submit" name="add_category_product" class="btn btn-info">Create account</button>
