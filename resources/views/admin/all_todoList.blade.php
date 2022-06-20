@@ -13,7 +13,7 @@
           <option value="2">Bulk edit</option>
           <option value="3">Export</option>
         </select>
-        <button class="btn btn-sm btn-default">Apply</button>                
+        <button class="btn btn-sm btn-default">Apply</button>
       </div>
       <div class="col-sm-4">
       </div>
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="table-responsive">
-      <table class="table table-striped b-t b-light">
+      <table id="datatable" class="table table-striped b-t b-light">
         <thead>
           <tr>
             <!-- <th style="width:20px;">
@@ -43,66 +43,68 @@
           </tr>
         </thead>
         <tbody>
-    
-            @foreach($showToDoList as $showList)
+
+          @foreach($showToDoList as $showList)
           <tr>
             <!-- <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td> -->
-            <td>{{$loop->iteration}}</td>
-            <td>{{$showList->task_name}}</td>
-            <td>{{$showList->code_task}}</td>
-            <td>{{$showList->name}}</td>
+            <td class="id">{{$showList->id}}</td>
+            <td class="taskName" >{{$showList->task_name}}</td>
+            <td class="codeTask">{{$showList->code_task}}</td>
+            <td class="Assign_name" data-id-user="{{$showList->assign}}">{{$showList->name}}</td>
+          
             <td>
-              <a href="" data-toggle="modal" data-target="#edit-task" class="active" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i></a>
-              <a href="{{route('task.delete', ['id' => $showList->id])}}" class="active" ui-toggle-class=""><i class="fa fa-trash text-danger text"></i></a>
+            <a href="" data-toggle="modal" data-target="#edit-tasks" class="btn_edit" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i></a>
+              <a href="{{route('task.delete', ['id' => $showList->id])}}" class="active"  ui-toggle-class=""><i class="fa fa-trash text-danger text"></i></a>
             </td>
           </tr>
           @endforeach
 
-          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="edit-task" class="modal fade">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                        <h4 class="modal-title">Form Tittle</h4>
-                                    </div>
-                                    <div class="modal-body">
+          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="edit-tasks" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                  <h4 class="modal-title">Edit Task</h4>
+                </div>
+                <div class="modal-body">
 
-                                        <form role="form">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputFile">File input</label>
-                                                <input type="file" id="exampleInputFile3">
-                                                <p class="help-block">Example block-level help text here.</p>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Check me out
-                                                </label>
-                                            </div>
-                                            <button type="submit" class="btn btn-default">Submit</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-   
+                  <form role="form">
+                    <div class="form-group">
+                    <input type="hidden" id="id" value="" />
+                      <label for="exampleInputEmail1">Name task</label>
+
+                      <input type="text" class="form-control" id="nameTask" placeholder="">
+                      
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Assign</label>
+                        <!-- {{dump($showToDoList)}} -->
+                        <!-- {{dump($showUser)}} -->
+                      <select class="form-control input-sm m-bot15" id="assign_name" name="assign" >
+                        @foreach($showUser as $user)  
+                            <option  value="{{$user->id}}">{{$user->name}}</option>
+                        @endforeach
+                      </select>
+
+                    </div>
+                    <button type="submit" id="submit" class="btn btn-default">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </tbody>
       </table>
     </div>
     <footer class="panel-footer">
       <div class="row">
-        
+
         <div class="col-sm-5 text-center">
           <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
         </div>
-        <div class="col-sm-7 text-right text-center-xs">                
+        <div class="col-sm-7 text-right text-center-xs">
           <ul class="pagination pagination-sm m-t-none m-b-none">
             <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
             <li><a href="">1</a></li>
@@ -113,6 +115,22 @@
           </ul>
         </div>
       </div>
+      <script>
+        $(document).on('click','.btn_edit',function(){
+            console.log('opened');
+            var data= $(this).parents('tr');
+            $('#id').val(data.find('.id').text());
+            $('#nameTask').val(data.find('.taskName').text());
+            $('#assign_name').val(data.find('.Assign_name').attr('data-id-user'));
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#datatable').Datatable({
+                select:true
+            });
+        });
+    </script>
     </footer>
   </div>
 </div>

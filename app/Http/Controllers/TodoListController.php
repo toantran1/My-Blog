@@ -19,7 +19,7 @@ class TodoListController extends Controller
     public function insert_task(){
 
         $permitted_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        $code_task = substr(str_shuffle($permitted_chars), 0, 10);
+        $code_task = substr(str_shuffle($permitted_chars), 0, 15);
         
 
         $data = request()->validate([
@@ -53,10 +53,12 @@ class TodoListController extends Controller
                 ->get([ 'users.name',
                         'tbl_todolist.task_name',
                         'tbl_todolist.code_task',
-                        'tbl_todolist.id']);
-
+                        'tbl_todolist.id',
+                        'tbl_todolist.assign']);
+        $showUser = User::all();
+       
         if($showToDoList){
-            return view('admin.all_todoList')->with(compact('showToDoList'));
+            return view('admin.all_todoList')->with(compact(['showToDoList','showUser']));
         }else{
             return view('admin.all_todoList');
         }
